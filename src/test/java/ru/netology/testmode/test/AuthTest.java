@@ -1,8 +1,6 @@
 package ru.netology.testmode.test;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.time.Duration;
 
@@ -30,8 +28,8 @@ class AuthTest {
         // TODO: добавить логику теста, в рамках которого будет выполнена попытка входа в личный кабинет с учётными
         //  данными зарегистрированного активного пользователя, для заполнения полей формы используйте
         //  пользователя registeredUser
-        $(".form [data-test-id='login'] .input__control").setValue(registeredUser.getLogin());
-        $(".form [data-test-id='password'] .input__control").setValue(registeredUser.getPassword());
+        $(".form [data-test-id='login'] .input__box .input__control").setValue(registeredUser.getLogin());
+        $(".form [data-test-id='password'] .input__box .input__control").setValue(registeredUser.getPassword());
         $$("button").find(exactText("Продолжить")).click();
         $(byText("Личный кабинет")).shouldBe(visible);
     }
@@ -42,8 +40,8 @@ class AuthTest {
         var notRegisteredUser = getUser("active");
         // TODO: добавить логику теста в рамках которого будет выполнена попытка входа в личный кабинет
         //  незарегистрированного пользователя, для заполнения полей формы используйте пользователя notRegisteredUser
-        $(".form [data-test-id='login'] .input__control").setValue(notRegisteredUser.getLogin());
-        $(".form [data-test-id='password'] .input__control").setValue(notRegisteredUser.getPassword());
+        $(".form [data-test-id='login'] .input__box .input__control").setValue(notRegisteredUser.getLogin());
+        $(".form [data-test-id='password'] .input__box .input__control").setValue(notRegisteredUser.getPassword());
         $$("button").find(exactText("Продолжить")).click();
         $(byText("Ошибка")).shouldBe(visible, Duration.ofSeconds(10));
         $(withText("Неверно указан логин или пароль")).shouldBe(visible, Duration.ofSeconds(10));
@@ -55,8 +53,8 @@ class AuthTest {
         var blockedUser = getRegisteredUser("blocked");
         // TODO: добавить логику теста в рамках которого будет выполнена попытка входа в личный кабинет,
         //  заблокированного пользователя, для заполнения полей формы используйте пользователя blockedUser
-        $(".form [data-test-id='login'] .input__control").setValue(blockedUser.getLogin());
-        $(".form [data-test-id='password'] .input__control").setValue(blockedUser.getPassword());
+        $(".form [data-test-id='login'] .input__box .input__control").setValue(blockedUser.getLogin());
+        $(".form [data-test-id='password'] .input__box .input__control").setValue(blockedUser.getPassword());
         $$("button").find(exactText("Продолжить")).click();
         $(byText("Ошибка")).shouldBe(visible, Duration.ofSeconds(10));
         $(withText("Пользователь заблокирован")).shouldBe(visible, Duration.ofSeconds(10));
@@ -70,8 +68,8 @@ class AuthTest {
         // TODO: добавить логику теста в рамках которого будет выполнена попытка входа в личный кабинет с неверным
         //  логином, для заполнения поля формы "Логин" используйте переменную wrongLogin,
         //  "Пароль" - пользователя registeredUser
-        $(".form [data-test-id='login'] .input__control").setValue(wrongLogin);
-        $(".form [data-test-id='password'] .input__control").setValue(registeredUser.getPassword());
+        $(".form [data-test-id='login'] .input__box .input__control").setValue(wrongLogin);
+        $(".form [data-test-id='password'] .input__box .input__control").setValue(registeredUser.getPassword());
         $$("button").find(exactText("Продолжить")).click();
         $(byText("Ошибка")).shouldBe(visible, Duration.ofSeconds(10));
         $(withText("Неверно указан логин или пароль")).shouldBe(visible, Duration.ofSeconds(10));
@@ -85,8 +83,8 @@ class AuthTest {
         // TODO: добавить логику теста в рамках которого будет выполнена попытка входа в личный кабинет с неверным
         //  паролем, для заполнения поля формы "Логин" используйте пользователя registeredUser,
         //  "Пароль" - переменную wrongPassword
-        $(".form [data-test-id='login'] .input__control").setValue(registeredUser.getLogin());
-        $(".form [data-test-id='password'] .input__control").setValue(wrongPassword);
+        $(".form [data-test-id='login'] .input__box .input__control").setValue(registeredUser.getLogin());
+        $(".form [data-test-id='password'] .input__box .input__control").setValue(wrongPassword);
         $$("button").find(exactText("Продолжить")).click();
         $(byText("Ошибка")).shouldBe(visible, Duration.ofSeconds(10));
         $(withText("Неверно указан логин или пароль")).shouldBe(visible, Duration.ofSeconds(10));
